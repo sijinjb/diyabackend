@@ -25,3 +25,27 @@ class Blog(models.Model):
 
     def __str__(self):
         return self.title
+    
+
+# class Scooter(models.Model):
+#     title = models.CharField(max_length=255)
+#     image_file = models.ImageField(upload_to='scooter_images/')  # Path to save uploaded images
+
+#     def __str__(self):
+#         return self.title
+
+class Scooter(models.Model):
+    title = models.CharField(max_length=300)
+    description = models.TextField(blank=True, null=True)
+    image_file = models.ImageField(upload_to="images/")
+    uploaded_at = models.DateTimeField(auto_now=True)
+    name = models.CharField(max_length=255, blank=True, null=True)  # Add a 'name' field
+
+    def save(self, *args, **kwargs):
+        if not self.name:
+            # Automatically set the name field to the name of the uploaded file if it's not provided
+            self.name = self.image_file.name.split('/')[-1]  # Extracts the name of the image file
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return self.title

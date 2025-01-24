@@ -19,13 +19,16 @@ from django.urls import path,include
 from django.conf import settings
 from django.conf.urls.static import static
 from rest_framework import routers
-from app1.views import ImageViewSet, BlogViewSet
+from app1.views import ImageViewSet, BlogViewSet, ScooterViewSet
 
 
 
 router= routers.DefaultRouter()
 router.register(r'images', ImageViewSet, basename='image')
 router.register(r'blogs' , BlogViewSet, basename='blog' )
+router.register(r'scooters' , ScooterViewSet, basename='scooter' )
+
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
